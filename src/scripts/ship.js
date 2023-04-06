@@ -1,14 +1,13 @@
-const ship = (length) => {
+const ship = function (length) {
   this.hitCount = 0;
-  const isSunk = () => {
+  this.length = length;
+  this.isSunk = () => {
     if (this.hitCount === length) return true;
     return false;
   };
-  const hit = () => {
+  this.hit = () => {
     this.hitCount++;
   };
-
-  return { length, hitCount, isSunk, hit };
 };
 
 export default ship;
