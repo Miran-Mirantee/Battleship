@@ -1,5 +1,7 @@
 class player {
-  constructor() {}
+  constructor() {
+    this.playerturn = false;
+  }
   randNum() {
     return Math.floor(Math.random() * 10) + 1;
   }
