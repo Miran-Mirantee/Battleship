@@ -1,4 +1,4 @@
-const gameBoardDom = function (displayArea) {
+const gameBoardDom = function (displayArea, gameBoard) {
   this.createBoard = () => {
     const board = document.createElement("div");
     board.classList.add("board");
@@ -13,6 +13,21 @@ const gameBoardDom = function (displayArea) {
       board.append(row);
     }
     displayArea.append(board);
+  };
+
+  this.updateBoard = () => {
+    const board = document.querySelector(".board");
+    for (let y = 0; y <= 9; y++) {
+      for (let x = 0; x <= 9; x++) {
+        if (gameBoard.board[x][y]) {
+          const ship = document.querySelector(
+            `.board .board-row:nth-child(${10 - y}) :nth-child(${x})`
+          );
+          ship.classList.add("ship");
+          console.log(board);
+        }
+      }
+    }
   };
 };
 

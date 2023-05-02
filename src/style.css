@@ -6,11 +6,13 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  gap: 16px;
 }
 
 .display-area {
   display: flex;
-  justify-content: space-evenly;
+  gap: 10vw;
 }
 
 .board {
@@ -26,3 +28,17 @@ body {
 .tile {
   border: 1px solid black;
 }
+
+.btn {
+  font-size: 32px;
+  padding: 4px 16px;
+  cursor: pointer;
+}
+
+.ship {
+  background-color: red;
+}
+
+/* .board .board-row:nth-child(9) :nth-child(1) {
+  background-color: green;
+} */
