@@ -1,6 +1,7 @@
-class player {
-  constructor() {
+class Player {
+  constructor(isBot) {
     this.playerturn = false;
+    this.isBot = isBot;
   }
   randNum() {
     return Math.floor(Math.random() * 10) + 1;
@@ -19,4 +20,4 @@ class player {
   }
 }
 
-export default player;
+export default Player;
