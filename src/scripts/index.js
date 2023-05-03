@@ -25,14 +25,13 @@ const gameStart = () => {
   botBoard.placeShip([0, 0], 5);
   botBoard.placeShip([2, 2], 4);
   botBoard.placeShip([4, 4], 3);
-  botBoard.placeShip([6, 6], 3);
-  botBoard.placeShip([8, 8], 2);
+  botBoard.placeShip([6, 8], 3, true);
+  botBoard.placeShip([9, 8], 2, true);
   botBoardDom.updateBoard();
 };
 
 playerBoardDom.createBoard();
 botBoardDom.createBoard();
-// boardDom.createBoard();
 
 startBtn.addEventListener("click", () => {
   gameStart();

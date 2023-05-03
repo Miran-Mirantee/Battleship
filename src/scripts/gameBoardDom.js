@@ -19,13 +19,19 @@ const gameBoardDom = function (displayArea, gameBoard) {
     // const board = document.querySelector(".board");
     for (let y = 1; y <= 10; y++) {
       for (let x = 1; x <= 10; x++) {
-        if (gameBoard.board[x - 1][y - 1]) {
-          const ship = board.querySelector(
-            `.board-row:nth-child(${11 - y}) :nth-child(${x})`
-          );
-          ship.classList.add("ship");
-          console.log(board);
+        const ship = gameBoard.board[x - 1][y - 1];
+        if (!ship) {
+          continue;
         }
+        for (let i = 0; i < ship.length; i++) {
+          let query = `.board-row:nth-child(${11 - y}) :nth-child(${x + i})`;
+          if (ship.isVertical === true)
+            query = `.board-row:nth-child(${11 - y + i}) :nth-child(${x})`;
+
+          const shipTile = board.querySelector(query);
+          shipTile.classList.add("ship");
+        }
+        console.log(ship);
       }
     }
   };

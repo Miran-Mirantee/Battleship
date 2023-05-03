@@ -6,8 +6,8 @@ const gameBoard = function () {
     this.board[i] = new Array(10);
   }
   this.missedCord = new Array();
-  this.placeShip = (cord, length) => {
-    this.board[cord[0]][cord[1]] = new ship(length);
+  this.placeShip = (cord, length, isVertical) => {
+    this.board[cord[0]][cord[1]] = new ship(length, isVertical);
   };
   this.receiveAttack = (cord) => {
     if (this.board[cord[0]][cord[1]] === undefined) {
