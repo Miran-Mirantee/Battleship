@@ -6,23 +6,33 @@ import "../style.css";
 const displayArea = document.querySelector(".display-area");
 const startBtn = document.querySelector(".start.btn");
 
-const board = new gameBoard();
-const boardDom = new gameBoardDom(displayArea, board);
+const playerBoard = new gameBoard();
+const botBoard = new gameBoard();
+const playerBoardDom = new gameBoardDom(displayArea, playerBoard);
+const botBoardDom = new gameBoardDom(displayArea, botBoard);
 
 const gameStart = () => {
   console.log("start the game!");
   const player = new Player(false);
   const bot = new Player(true);
-  board.placeShip([1, 1], 5);
-  board.placeShip([2, 3], 4);
-  board.placeShip([3, 5], 3);
-  board.placeShip([4, 7], 3);
-  board.placeShip([5, 9], 2);
-  boardDom.updateBoard();
+  playerBoard.placeShip([1, 1], 5);
+  playerBoard.placeShip([2, 3], 4);
+  playerBoard.placeShip([3, 5], 3);
+  playerBoard.placeShip([4, 7], 3);
+  playerBoard.placeShip([5, 9], 2);
+  playerBoardDom.updateBoard();
+
+  botBoard.placeShip([0, 0], 5);
+  botBoard.placeShip([2, 2], 4);
+  botBoard.placeShip([4, 4], 3);
+  botBoard.placeShip([6, 6], 3);
+  botBoard.placeShip([8, 8], 2);
+  botBoardDom.updateBoard();
 };
 
-boardDom.createBoard();
-boardDom.createBoard();
+playerBoardDom.createBoard();
+botBoardDom.createBoard();
+// boardDom.createBoard();
 
 startBtn.addEventListener("click", () => {
   gameStart();

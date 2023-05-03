@@ -20,8 +20,8 @@ const gameBoardDom = function (displayArea, gameBoard) {
     for (let y = 1; y <= 10; y++) {
       for (let x = 1; x <= 10; x++) {
         if (gameBoard.board[x - 1][y - 1]) {
-          const ship = document.querySelector(
-            `.board .board-row:nth-child(${11 - y}) :nth-child(${x})`
+          const ship = board.querySelector(
+            `.board-row:nth-child(${11 - y}) :nth-child(${x})`
           );
           ship.classList.add("ship");
           console.log(board);
