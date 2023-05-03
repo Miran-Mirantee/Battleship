@@ -1,4 +1,4 @@
-const gameBoardDom = function (displayArea, gameBoard) {
+const gameBoardDom = function (displayArea, gameBoard, isBot) {
   const board = document.createElement("div");
   this.createBoard = () => {
     board.classList.add("board");
@@ -30,8 +30,18 @@ const gameBoardDom = function (displayArea, gameBoard) {
 
           const shipTile = board.querySelector(query);
           shipTile.classList.add("ship");
+
+          if (isBot) {
+            shipTile.addEventListener("click", () => {
+              ship.hit();
+              console.log("hitted");
+              shipTile.style.pointerEvents = "none";
+              if (ship.isSunk()) console.log("ship is down!");
+              // console.log(ship);
+            });
+          }
         }
-        console.log(ship);
+        // console.log(ship);
       }
     }
   };

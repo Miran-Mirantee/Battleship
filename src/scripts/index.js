@@ -9,7 +9,7 @@ const startBtn = document.querySelector(".start.btn");
 const playerBoard = new gameBoard();
 const botBoard = new gameBoard();
 const playerBoardDom = new gameBoardDom(displayArea, playerBoard);
-const botBoardDom = new gameBoardDom(displayArea, botBoard);
+const botBoardDom = new gameBoardDom(displayArea, botBoard, true);
 
 const gameStart = () => {
   console.log("start the game!");
