@@ -1,47 +1,60 @@
-const gameBoardDom = function (displayArea, gameBoard, isBot) {
-  const board = document.createElement("div");
-  this.createBoard = () => {
+const gameBoardDom = function (displayArea, playerBoard, player2Board) {
+  this.placeShip = (x, y, gameBoard, boardDom) => {
+    const ship = gameBoard.board[x - 1][y - 1];
+    if (!ship) return;
+
+    for (let i = 0; i < ship.length; i++) {
+      let query = `.board-row:nth-child(${11 - y}) :nth-child(${x + i})`;
+      if (ship.isVertical)
+        query = `.board-row:nth-child(${11 - y + i}) :nth-child(${x})`;
+
+      // error
+      const shipTile = boardDom.querySelector(query);
+      shipTile.classList.add("ship");
+
+      shipTile.addEventListener("click", () => {
+        gameBoard.receiveAttack([x - 1, y - 1]);
+        console.log("hitted");
+        if (ship.isSunk()) console.log("ship is down!");
+      });
+    }
+    // console.log(ship);
+  };
+
+  this.createBoard = (player) => {
+    const board = document.createElement("div");
     board.classList.add("board");
-    for (let x = 0; x < 10; x++) {
+
+    for (let y = 0; y < 10; y++) {
       const row = document.createElement("div");
       row.classList.add("board-row");
-      for (let y = 0; y < 10; y++) {
+      board.append(row);
+
+      for (let x = 0; x < 10; x++) {
         const tile = document.createElement("div");
         tile.classList.add("tile");
         row.append(tile);
+
+        if (!player.isBot) {
+          continue;
+        }
+
+        tile.addEventListener("click", () => {
+          console.log(player);
+          tile.style.pointerEvents = "none";
+        });
       }
-      board.append(row);
     }
     displayArea.append(board);
   };
 
   this.updateBoard = () => {
-    // const board = document.querySelector(".board");
+    const board = document.querySelectorAll(".board");
+    console.log(board);
     for (let y = 1; y <= 10; y++) {
       for (let x = 1; x <= 10; x++) {
-        const ship = gameBoard.board[x - 1][y - 1];
-        if (!ship) {
-          continue;
-        }
-        for (let i = 0; i < ship.length; i++) {
-          let query = `.board-row:nth-child(${11 - y}) :nth-child(${x + i})`;
-          if (ship.isVertical === true)
-            query = `.board-row:nth-child(${11 - y + i}) :nth-child(${x})`;
-
-          const shipTile = board.querySelector(query);
-          shipTile.classList.add("ship");
-
-          if (isBot) {
-            shipTile.addEventListener("click", () => {
-              ship.hit();
-              console.log("hitted");
-              shipTile.style.pointerEvents = "none";
-              if (ship.isSunk()) console.log("ship is down!");
-              // console.log(ship);
-            });
-          }
-        }
-        // console.log(ship);
+        this.placeShip(x, y, playerBoard, board[0]);
+        this.placeShip(x, y, player2Board, board[1]);
       }
     }
   };
