@@ -13,14 +13,14 @@ const gameStart = () => {
   console.log("start the game!");
 
   const player = new Player(false);
+  // for debugging
+  // const player = new Player(true);
   const bot = new Player(true);
-  // const playerBoardDom = new gameBoardDom(displayArea, playerBoard, player);
-  // const botBoardDom = new gameBoardDom(displayArea, botBoard, bot);
-  const boardDom = new gameBoardDom(displayArea, playerBoard, botBoard);
-  // playerBoardDom.createBoard();
-  // botBoardDom.createBoard();
-  boardDom.createBoard(player);
-  boardDom.createBoard(bot);
+  const boardDom = new gameBoardDom(displayArea, playerBoard, botBoard, [
+    player,
+    bot,
+  ]);
+  boardDom.createBoard();
   playerBoard.placeShip([1, 1], 5);
   playerBoard.placeShip([2, 3], 4);
   playerBoard.placeShip([3, 5], 3);
@@ -46,5 +46,3 @@ const gameStart = () => {
 startBtn.addEventListener("click", () => {
   gameStart();
 });
-
-console.log(botBoard.missedCord);

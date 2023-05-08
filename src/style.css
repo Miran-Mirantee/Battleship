@@ -39,11 +39,11 @@ body {
   background-color: red;
 }
 
-.board:nth-child(2) .tile {
+.board.active .tile {
   cursor: pointer;
 }
 
-.board:nth-child(2) .tile:hover {
+.board.active .tile:hover {
   background-color: rgb(103, 253, 253);
 }
 
