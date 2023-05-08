@@ -1,9 +1,4 @@
-const gameBoardDom = function (
-  displayArea,
-  playerBoard,
-  player2Board,
-  players
-) {
+const gameBoardDom = function (displayArea, gameBoards, players) {
   // always let player1 start first
   players[1].playerturn = true;
 
@@ -13,6 +8,7 @@ const gameBoardDom = function (
     });
   };
 
+  // broken
   this.placeShip = (x, y, gameBoard, boardDom) => {
     const ship = gameBoard.board[x - 1][y - 1];
     if (!ship) return;
@@ -26,6 +22,7 @@ const gameBoardDom = function (
       const shipTile = boardDom.querySelector(query);
       shipTile.classList.add("ship");
 
+      // error
       shipTile.addEventListener("click", () => {
         gameBoard.receiveAttack([x - 1, y - 1]);
         console.log("hitted");
@@ -42,12 +39,12 @@ const gameBoardDom = function (
       if (i == 0) board.classList.add("player1");
       else board.classList.add("player2");
 
-      for (let y = 0; y < 10; y++) {
+      for (let y = 9; y >= 0; y--) {
         const row = document.createElement("div");
         row.classList.add("board-row");
         board.append(row);
 
-        for (let x = 0; x < 10; x++) {
+        for (let x = 0; x <= 9; x++) {
           const tile = document.createElement("div");
           tile.classList.add("tile");
           row.append(tile);
@@ -58,6 +55,8 @@ const gameBoardDom = function (
 
           tile.addEventListener("click", () => {
             if (!players[i].playerturn) {
+              gameBoards[i].receiveAttack([x, y]);
+              console.log(gameBoards[i].missedCord);
               this.updateBoard();
               tile.style.pointerEvents = "none";
             }
@@ -66,6 +65,7 @@ const gameBoardDom = function (
       }
       displayArea.append(board);
     }
+    console.log(players);
   };
 
   this.updateBoard = () => {
@@ -80,8 +80,8 @@ const gameBoardDom = function (
     });
     for (let y = 1; y <= 10; y++) {
       for (let x = 1; x <= 10; x++) {
-        this.placeShip(x, y, playerBoard, boards[0]);
-        this.placeShip(x, y, player2Board, boards[1]);
+        this.placeShip(x, y, gameBoards[0], boards[0]);
+        this.placeShip(x, y, gameBoards[1], boards[1]);
       }
     }
   };

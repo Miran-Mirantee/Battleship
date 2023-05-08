@@ -16,10 +16,11 @@ const gameStart = () => {
   // for debugging
   // const player = new Player(true);
   const bot = new Player(true);
-  const boardDom = new gameBoardDom(displayArea, playerBoard, botBoard, [
-    player,
-    bot,
-  ]);
+  const boardDom = new gameBoardDom(
+    displayArea,
+    [playerBoard, botBoard],
+    [player, bot]
+  );
   boardDom.createBoard();
   playerBoard.placeShip([1, 1], 5);
   playerBoard.placeShip([2, 3], 4);
