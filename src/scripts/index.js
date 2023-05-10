@@ -33,6 +33,7 @@ const gameStart = () => {
   botBoard.placeShip([6, 8], 3, true);
   botBoard.placeShip([9, 8], 2, true);
   boardDom.updateBoard();
+  boardDom.placeAllShip();
 
   // playerBoard.placeShip([1, 1], 5);
   // playerBoard.placeShip([2, 3], 4);

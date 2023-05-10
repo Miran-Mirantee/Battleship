@@ -8,7 +8,6 @@ const gameBoardDom = function (displayArea, gameBoards, players) {
     });
   };
 
-  // broken
   this.placeShip = (x, y, gameBoard, boardDom) => {
     const ship = gameBoard.board[x - 1][y - 1];
     if (!ship) return;
@@ -18,14 +17,15 @@ const gameBoardDom = function (displayArea, gameBoards, players) {
       if (ship.isVertical)
         query = `.board-row:nth-child(${11 - y + i}) :nth-child(${x})`;
 
-      // error
       const shipTile = boardDom.querySelector(query);
       shipTile.classList.add("ship");
 
-      // error
       shipTile.addEventListener("click", () => {
-        gameBoard.receiveAttack([x - 1, y - 1]);
+        // skip the first tile of ship
+        if (i > 0) gameBoard.receiveAttack([x - 1, y - 1]);
         console.log("hitted");
+        console.log(ship);
+
         if (ship.isSunk()) console.log("ship is down!");
       });
     }
@@ -54,12 +54,11 @@ const gameBoardDom = function (displayArea, gameBoards, players) {
           // }
 
           tile.addEventListener("click", () => {
-            if (!players[i].playerturn) {
-              gameBoards[i].receiveAttack([x, y]);
-              console.log(gameBoards[i].missedCord);
-              this.updateBoard();
-              tile.style.pointerEvents = "none";
-            }
+            gameBoards[i].receiveAttack([x, y]);
+            // console.log(gameBoards[i].missedCord);
+            this.updateBoard();
+            tile.style.pointerEvents = "none";
+            tile.classList.add("shot");
           });
         }
       }
@@ -78,6 +77,10 @@ const gameBoardDom = function (displayArea, gameBoards, players) {
     players.forEach((player) => {
       player.playerturn = !player.playerturn;
     });
+  };
+
+  this.placeAllShip = () => {
+    const boards = document.querySelectorAll(".board");
     for (let y = 1; y <= 10; y++) {
       for (let x = 1; x <= 10; x++) {
         this.placeShip(x, y, gameBoards[0], boards[0]);

@@ -29,6 +29,10 @@ body {
   border: 1px solid black;
 }
 
+.tile.shot {
+  background-color: gray;
+}
+
 .btn {
   font-size: 32px;
   padding: 4px 16px;
@@ -39,7 +43,12 @@ body {
   background-color: red;
 }
 
-.board.active .tile {
+.board {
+  pointer-events: none;
+}
+
+.board.active {
+  pointer-events: all;
   cursor: pointer;
 }
 
