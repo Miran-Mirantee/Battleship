@@ -1,14 +1,6 @@
-import gameBoard from "./gameBoard";
-
 const gameBoardDom = function (displayArea, gameBoards, players) {
   // always let player1 start first
   players[1].playerturn = true;
-
-  this.changeTurn = () => {
-    players.forEach((player) => {
-      player.playerturn = !player.playerturn;
-    });
-  };
 
   this.placeShip = (x, y, gameBoard, boardDom) => {
     const ship = gameBoard.board[x - 1][y - 1];
@@ -54,17 +46,13 @@ const gameBoardDom = function (displayArea, gameBoards, players) {
           tile.addEventListener("click", () => {
             gameBoards[i].receiveAttack([x, y]);
             // console.log(gameBoards[i].missedCord);
-            this.updateBoard();
+            this.changeTurn();
             tile.style.pointerEvents = "none";
             tile.classList.add("shot");
 
             if (players[i].isBot) {
-              const enemyBoard = gameBoards.slice();
-              enemyBoard.splice(i, 1);
-              const cord = players[i].randHit(enemyBoard[0].missedCord);
-              console.log(cord);
-              // enemyBoard[0].receiveAttack(cord);
-              // console.log(enemyBoard[0].missedCord);
+              this.botMove(i);
+              this.changeTurn();
               // continue;
             }
           });
@@ -72,10 +60,30 @@ const gameBoardDom = function (displayArea, gameBoards, players) {
       }
       displayArea.append(board);
     }
-    console.log(players);
   };
 
-  this.updateBoard = () => {
+  // could use some of refactor
+  this.botMove = (botIndex) => {
+    let enemy = `.player1`;
+    if (botIndex === 0) enemy = `.player2`;
+    const enemyBoard = gameBoards.slice();
+    enemyBoard.splice(botIndex, 1);
+    const cord = players[botIndex].randHit(enemyBoard[0].missedCord);
+    enemyBoard[0].receiveAttack(cord);
+    console.log(cord[0], cord[1]);
+    console.log(enemyBoard[0].missedCord);
+
+    const board = document.querySelector(enemy);
+    let query = `.board-row:nth-child(${10 - cord[1]}) :nth-child(${
+      1 + cord[0]
+    })`;
+    const tile = board.querySelector(query);
+    console.log(tile);
+    tile.style.pointerEvents = "none";
+    tile.classList.add("shot");
+  };
+
+  this.changeTurn = () => {
     const boards = document.querySelectorAll(".board");
     boards.forEach((board) => board.classList.remove("active"));
 

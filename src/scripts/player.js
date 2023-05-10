@@ -4,16 +4,21 @@ class Player {
     this.isBot = isBot;
   }
   randNum() {
-    return Math.floor(Math.random() * 10) + 1;
+    return Math.floor(Math.random() * 10);
   }
 
   randCord() {
+    // const result = new Array(this.randNum(), this.randNum());
+    // console.log(result);
+    // return result;
     return new Array(this.randNum(), this.randNum());
   }
 
   randHit(missedCord) {
     let cord = this.randCord();
-    while (missedCord.includes(cord)) {
+    const checkContainedArr = () =>
+      missedCord.some((arr) => arr.every((val, index) => val === cord[index]));
+    while (checkContainedArr()) {
       cord = this.randCord();
     }
     return cord;
