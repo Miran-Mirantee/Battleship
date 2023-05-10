@@ -12,7 +12,7 @@ class Player {
   }
 
   randHit(missedCord) {
-    let cord = this.randCord;
+    let cord = this.randCord();
     while (missedCord.includes(cord)) {
       cord = this.randCord();
     }

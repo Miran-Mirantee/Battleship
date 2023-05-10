@@ -1,3 +1,5 @@
+import gameBoard from "./gameBoard";
+
 const gameBoardDom = function (displayArea, gameBoards, players) {
   // always let player1 start first
   players[1].playerturn = true;
@@ -49,16 +51,22 @@ const gameBoardDom = function (displayArea, gameBoards, players) {
           tile.classList.add("tile");
           row.append(tile);
 
-          // if (!players[i].isBot) {
-          //   continue;
-          // }
-
           tile.addEventListener("click", () => {
             gameBoards[i].receiveAttack([x, y]);
             // console.log(gameBoards[i].missedCord);
             this.updateBoard();
             tile.style.pointerEvents = "none";
             tile.classList.add("shot");
+
+            if (players[i].isBot) {
+              const enemyBoard = gameBoards.slice();
+              enemyBoard.splice(i, 1);
+              const cord = players[i].randHit(enemyBoard[0].missedCord);
+              console.log(cord);
+              // enemyBoard[0].receiveAttack(cord);
+              // console.log(enemyBoard[0].missedCord);
+              // continue;
+            }
           });
         }
       }
