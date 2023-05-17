@@ -32,6 +32,7 @@ const gameBoardDom = function (displayArea, gameBoards, players) {
   };
 
   this.createBoard = () => {
+    this.clearBoard();
     for (let i = 0; i < 2; i++) {
       const board = document.createElement("div");
       board.classList.add("board");
@@ -64,6 +65,13 @@ const gameBoardDom = function (displayArea, gameBoards, players) {
         }
       }
       displayArea.append(board);
+    }
+  };
+
+  this.clearBoard = () => {
+    const boards = document.querySelectorAll(".board");
+    for (const board of boards) {
+      board.remove();
     }
   };
 
