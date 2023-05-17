@@ -5,13 +5,13 @@ const gameBoard = function () {
   for (let i = 0; i < 10; i++) {
     this.board[i] = new Array(10);
   }
-  this.missedCord = new Array();
+  this.shotCord = new Array();
   this.placeShip = (cord, length, isVertical) => {
     this.board[cord[0]][cord[1]] = new ship(length, isVertical);
   };
   this.receiveAttack = (cord) => {
+    this.shotCord.push(cord);
     if (this.board[cord[0]][cord[1]] === undefined) {
-      this.missedCord.push(cord);
       return false;
     }
     this.board[cord[0]][cord[1]].hit();

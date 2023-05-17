@@ -8,16 +8,13 @@ class Player {
   }
 
   randCord() {
-    // const result = new Array(this.randNum(), this.randNum());
-    // console.log(result);
-    // return result;
     return new Array(this.randNum(), this.randNum());
   }
 
-  randHit(missedCord) {
+  randHit(shotCord) {
     let cord = this.randCord();
     const checkContainedArr = () =>
-      missedCord.some((arr) => arr.every((val, index) => val === cord[index]));
+      shotCord.some((arr) => arr.every((val, index) => val === cord[index]));
     while (checkContainedArr()) {
       cord = this.randCord();
     }

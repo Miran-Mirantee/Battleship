@@ -45,7 +45,7 @@ const gameBoardDom = function (displayArea, gameBoards, players) {
 
           tile.addEventListener("click", () => {
             gameBoards[i].receiveAttack([x, y]);
-            // console.log(gameBoards[i].missedCord);
+            // console.log(gameBoards[i].shotCord);
             this.changeTurn();
             tile.style.pointerEvents = "none";
             tile.classList.add("shot");
@@ -68,10 +68,10 @@ const gameBoardDom = function (displayArea, gameBoards, players) {
     if (botIndex === 0) enemy = `.player2`;
     const enemyBoard = gameBoards.slice();
     enemyBoard.splice(botIndex, 1);
-    const cord = players[botIndex].randHit(enemyBoard[0].missedCord);
+    const cord = players[botIndex].randHit(enemyBoard[0].shotCord);
     enemyBoard[0].receiveAttack(cord);
     console.log(cord[0], cord[1]);
-    console.log(enemyBoard[0].missedCord);
+    console.log(enemyBoard[0].shotCord);
 
     const board = document.querySelector(enemy);
     let query = `.board-row:nth-child(${10 - cord[1]}) :nth-child(${
