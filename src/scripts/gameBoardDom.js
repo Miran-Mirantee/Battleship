@@ -24,6 +24,7 @@ const gameBoardDom = function (displayArea, gameBoards, players) {
           console.log("ship is down!");
           if (!gameBoard.checkShipNum()) {
             console.log(`${player.name} lose!!`);
+            boardDom.style.pointerEvents = "none";
           }
         }
       });
