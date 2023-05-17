@@ -1,7 +1,8 @@
 class Player {
-  constructor(isBot) {
+  constructor(name, isBot) {
     this.playerturn = false;
     this.isBot = isBot;
+    this.name = name;
   }
   randNum() {
     return Math.floor(Math.random() * 10);

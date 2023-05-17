@@ -12,10 +12,10 @@ const botBoard = new gameBoard();
 const gameStart = () => {
   console.log("start the game!");
 
-  const player = new Player(false);
+  const player = new Player("player", false);
   // for debugging
   // const player = new Player(true);
-  const bot = new Player(true);
+  const bot = new Player("computer", true);
   const boardDom = new gameBoardDom(
     displayArea,
     [playerBoard, botBoard],

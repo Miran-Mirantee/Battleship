@@ -2,7 +2,7 @@ const gameBoardDom = function (displayArea, gameBoards, players) {
   // always let player1 start first
   players[1].playerturn = true;
 
-  this.placeShip = (x, y, gameBoard, boardDom) => {
+  this.placeShip = (x, y, gameBoard, boardDom, player) => {
     const ship = gameBoard.board[x - 1][y - 1];
     if (!ship) return;
 
@@ -18,9 +18,14 @@ const gameBoardDom = function (displayArea, gameBoards, players) {
         // skip the first tile of ship
         if (i > 0) gameBoard.receiveAttack([x - 1, y - 1]);
         console.log("hitted");
-        console.log(ship);
+        // console.log(ship);
 
-        if (ship.isSunk()) console.log("ship is down!");
+        if (ship.isSunk()) {
+          console.log("ship is down!");
+          if (!gameBoard.checkShipNum()) {
+            console.log(`${player.name} lose!!`);
+          }
+        }
       });
     }
     // console.log(ship);
@@ -96,11 +101,11 @@ const gameBoardDom = function (displayArea, gameBoards, players) {
   };
 
   this.placeAllShip = () => {
-    const boards = document.querySelectorAll(".board");
+    const boardDoms = document.querySelectorAll(".board");
     for (let y = 1; y <= 10; y++) {
       for (let x = 1; x <= 10; x++) {
-        this.placeShip(x, y, gameBoards[0], boards[0]);
-        this.placeShip(x, y, gameBoards[1], boards[1]);
+        this.placeShip(x, y, gameBoards[0], boardDoms[0], players[0]);
+        this.placeShip(x, y, gameBoards[1], boardDoms[1], players[1]);
       }
     }
   };
